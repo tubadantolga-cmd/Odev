@@ -99,4 +99,65 @@
             border-radius: 15px;
             animation: fadeIn 0.5s ease-in-out;
         }
-        .answer-title { color: #065f46; margin
+        .answer-title { color: #065f46; margin-top: 0; font-weight: 600; }
+        .answer-item { 
+            margin-bottom: 12px; 
+            padding: 10px; 
+            background: rgba(255,255,255,0.5); 
+            border-radius: 8px;
+            color: #064e3b;
+        }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1>🎧 Listening Test</h1>
+    <p class="subtitle">Lütfen parçayı dinleyerek soruları cevaplayınız.</p>
+
+    <div class="audio-section">
+        <span class="audio-title">Dinleme Parçası</span>
+        <audio controls>
+            <source src="https://www.dropbox.com/scl/fi/vk0acm9buuhcpxx5ujvxv/Eagles-Hotel-California-81-1.mp3?rlkey=4s4hsf5y4f5173clmj855emuw&st=os3nyuo6&raw=1" type="audio/mpeg">
+            Tarayıcınız ses çalmayı desteklemiyor.
+        </audio>
+    </div>
+
+    <div class="question-block">
+        <label>1. Soru: Diyalogda geçen ana karakterin mesleği nedir?</label>
+        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
+    </div>
+
+    <div class="question-block">
+        <label>2. Soru: Toplantı saat kaçta başlayacak?</label>
+        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
+    </div>
+
+    <div class="question-block">
+        <label>3. Soru: Konuşmacı hafta sonu için ne öneriyor?</label>
+        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="showAnswers()">Sınavı Tamamla ve Kontrol Et</button>
+
+    <div id="answer-key">
+        <h3 class="answer-title">✅ Doğru Cevaplar</h3>
+        <div class="answer-item"><strong>1. Cevap:</strong> Doktor</div>
+        <div class="answer-item"><strong>2. Cevap:</strong> 14:30'da</div>
+        <div class="answer-item"><strong>3. Cevap:</strong> Doğa yürüyüşü yapmayı</div>
+        <p style="font-size: 0.9em; color: #065f46; margin-top: 15px; text-align: center;">* Lütfen kendi cevaplarınızla karşılaştırınız.</p>
+    </div>
+</div>
+
+<script>
+    function showAnswers() {
+        var key = document.getElementById("answer-key");
+        key.style.display = "block";
+        key.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+</script>
+
+</body>
+</html>
