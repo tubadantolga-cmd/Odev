@@ -7,16 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* GENEL SAYFA STİLİ */
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            /* Arka plana modern bir mavi-mor geçişi ekledik */
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
-            padding: 5px;
-            display: flex;
-            justify-content: center; 
-            min-height: 100vh;
-            color: #333;
+       body { 
+    font-family: 'Poppins', sans-serif; 
+    
+    /* Nyan Cat GIF URL'si */
+    background-image: url('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif');
+    
+    /* Sonsuza kadar tekrar etsin (Tiling) */
+    background-repeat: repeat;
+    
+    /* Arka plan sabit dursun, biz aşağı indikçe kaymasın (Daha hoş durur) */
+    background-attachment: fixed;
+
+    margin: 0; 
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
         }
 
         /* ANA KUTU (KART) STİLİ */
@@ -171,4 +179,5 @@
 
 </body>
 </html>
+
 
