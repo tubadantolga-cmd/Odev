@@ -4,138 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listening Testi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Sayfa Geneli */
+        /* Arka planı o sevdiğin renkli hale getirdik */
         body { 
-            font-family: Arial, sans-serif; 
-            background-color: #f4f4f4; 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0; 
             padding: 20px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
         }
 
-        /* Ana Konteyner - Her şeyi ortalar ama içindekiler sola yaslı olur */
+        /* Beyaz Ana Kart */
         .main-container {
             background: white;
             width: 100%;
-            max-width: 700px;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 650px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
-        h1 { text-align: center; color: #333; }
-        p.subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        h1 { text-align: center; color: #2c3e50; font-weight: 600; }
+        p.subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; }
 
-        /* Ses Kutusu */
+        /* Ses Bölümü - Mavi tonlu */
         .audio-section {
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
+            background: #f0f4ff;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            border-radius: 15px;
             margin-bottom: 30px;
             text-align: center;
         }
-        audio { width: 100%; margin-top: 10px; }
+        .audio-title { font-weight: 600; color: #4a5568; display: block; margin-bottom: 5px; }
+        audio { width: 100%; margin-top: 15px; }
 
-        /* Soru Alanları - Sola yaslı ve düzgün */
+        /* Soru Alanları */
         .question-block {
             margin-bottom: 25px;
             text-align: left;
         }
         .question-block label {
-            font-weight: bold;
+            font-weight: 600;
             display: block;
             margin-bottom: 10px;
-            color: #444;
+            color: #2d3748;
             font-size: 16px;
         }
         textarea {
             width: 100%;
             height: 100px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box; /* Genişliğin taşmasını engeller */
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            box-sizing: border-box;
             font-family: inherit;
             font-size: 14px;
+            transition: 0.3s;
         }
+        textarea:focus { border-color: #667eea; outline: none; }
 
-        /* Buton */
+        /* Renkli Buton */
         .submit-btn {
-            background-color: #007bff;
+            background: linear-gradient(to right, #667eea, #764ba2);
             color: white;
             border: none;
             padding: 15px;
             width: 100%;
-            border-radius: 6px;
+            border-radius: 50px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-top: 10px;
         }
-        .submit-btn:hover { background-color: #0056b3; }
+        .submit-btn:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
 
-        /* Cevap Anahtarı - Gizli */
+        /* Cevap Anahtarı - Yeşil Tonlu */
         #answer-key {
             display: none;
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            color: #155724;
+            margin-top: 35px;
+            padding: 25px;
+            background-color: #d1fae5;
+            border-left: 5px solid #10b981;
+            border-radius: 15px;
+            animation: fadeIn 0.5s ease-in-out;
         }
-        .answer-item { margin-bottom: 10px; border-bottom: 1px solid #badbcc; padding-bottom: 5px; }
-    </style>
-</head>
-<body>
-
-<div class="main-container">
-    <h1>Listening Test</h1>
-    <p class="subtitle">Lütfen aşağıdaki kaydı dinleyerek soruları cevaplayınız.</p>
-
-    <div class="audio-section">
-        <strong>Dinleme Parçası</strong>
-        <audio controls>
-            <source src="https://www.dropbox.com/scl/fi/vk0acm9buuhcpxx5ujvxv/Eagles-Hotel-California-81-1.mp3?rlkey=4s4hsf5y4f5173clmj855emuw&st=os3nyuo6&raw=1" type="audio/mpeg">
-            Tarayıcınız ses çalmayı desteklemiyor.
-        </audio>
-    </div>
-
-    <div class="question-block">
-        <label>1. Soru: Diyalogda geçen ana karakterin mesleği nedir?</label>
-        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
-    </div>
-
-    <div class="question-block">
-        <label>2. Soru: Toplantı saat kaçta başlayacak?</label>
-        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
-    </div>
-
-    <div class="question-block">
-        <label>3. Soru: Konuşmacı hafta sonu için ne öneriyor?</label>
-        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
-    </div>
-
-    <button class="submit-btn" onclick="showAnswers()">Sınavı Tamamla ve Cevapları Gör</button>
-
-    <div id="answer-key">
-        <h3>✅ Doğru Cevaplar</h3>
-        <div class="answer-item"><strong>1. Cevap:</strong> Doktor</div>
-        <div class="answer-item"><strong>2. Cevap:</strong> 14:30'da</div>
-        <div class="answer-item"><strong>3. Cevap:</strong> Doğa yürüyüşü yapmayı</div>
-    </div>
-</div>
-
-<script>
-    function showAnswers() {
-        var key = document.getElementById("answer-key");
-        key.style.display = "block";
-        key.scrollIntoView({ behavior: 'smooth' });
-    }
-</script>
-
-</body>
-</html>
+        .answer-title { color: #065f46; margin
