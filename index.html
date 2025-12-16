@@ -3,186 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listening Ödevi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Listening Testi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* GENEL SAYFA STİLİ */
-       body { 
-    font-family: 'Poppins', sans-serif; 
-    
-    /* Nyan Cat GIF URL'si */
-    background-image: url('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif');
-    
-    /* Sonsuza kadar tekrar etsin (Tiling) */
-    background-repeat: repeat;
-    
-    /* Arka plan sabit dursun, biz aşağı indikçe kaymasın (Daha hoş durur) */
-    background-attachment: fixed;
-
-    margin: 0; 
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            /* NYAN CAT ARKA PLANI */
+            background-image: url('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif');
+            background-repeat: repeat;
+            background-attachment: fixed;
+            margin: 0; 
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        /* ANA KUTU (KART) STİLİ */
-        .container { 
+        .main-container {
             background: white;
-    width: 100%;
-    max-width: 1100px;
-    padding: 40px;
-    border-radius: 20px;
-    margin: 20px 0;
-    box-sizing: border-box;/* Köşeleri daha yuvarlak yaptık */
-            /* Kutuya derinlik katan yumuşak bir gölge */
-            box-shadow: (0 15px 30px rgba(0, 0, 0, 0.6); 
+            width: 100%;
+            /* Geniş kutu ayarı */
+            max-width: 1100px; 
+            padding: 40px; 
+            border-radius: 20px;
+            
+            /* ESKİ VE SAĞLAM GÖLGE AYARI (Bunu geri getirdik) */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            
+            margin: 10px 0;
+            box-sizing: border-box;
         }
 
-     h1 { 
-    text-align: center; 
-    /* Standart koyu renk yerine canlı bir mavi veya mor seçebilirsin */
-    color: #667eea; 
-    font-weight: 600;
-    margin-top: 0;
-    /* İstersen başlığa hafif bir parlama (gölge) ekleyebiliriz */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-         
-        }
-        .sub-text { text-align: center; 
-    /* Çok koyu gri yerine daha yumuşak ve modern bir ton */
-    color: #a29bfe; 
-    font-weight: 500;
-    margin-bottom: 30px;}
-
-        /* SES OYNATICI KUTUSU */
-        .audio-box { 
-            border: none;
-            /* Hafif mavi bir arka plan */
-            background: #f0f4ff; 
-            padding: 25px; 
+        /* Başlıklar Nyan Cat üstünde okunsun diye hafif gölge */
+        h1 { 
             text-align: center; 
-            margin-bottom: 30px; 
-            border-radius: 15px;
-            /* Sol tarafa şık bir mavi çizgi */
-            border-left: 5px solid #667eea;
+            color: #667eea; 
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-top: 0; 
         }
-        .audio-title { font-weight: 600; color: #4a5568; display: block; margin-bottom: 5px; }
-        audio { width: 100%; margin-top: 15px; outline: none; }
+        
+        p.subtitle { text-align: center; color: #555; margin-bottom: 30px; font-weight: 500; }
 
-        /* SORU ALANLARI */
-        .question { margin-bottom: 25px; }
-        .question label {
-            font-weight: 600;
-            color: #2d3748;
-            display: block;
-            margin-bottom: 10px;
+        .audio-section {
+            background: #f0f4ff;
+            border-left: 6px solid #667eea;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
         }
-        textarea { 
+        audio { width: 100%; margin-top: 10px; }
+
+        .question-block { margin-bottom: 25px; text-align: left; }
+        label { font-weight: 600; display: block; margin-bottom: 10px; color: #2d3748; font-size: 1.1rem; }
+        
+        textarea {
             width: 100%; 
-            height: 90px; 
-            border-radius: 10px; 
-            border: 2px solid #e2e8f0; /* Daha açık renk kenarlık */
-            padding: 15px; 
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px;
             box-sizing: border-box; 
-            font-family: 'Poppins', sans-serif;
-            resize: vertical; /* Sadece dikey boyutlandırma */
+            font-family: inherit; 
+            font-size: 15px;
             transition: 0.3s;
         }
-        /* Textarea'ya tıklanınca kenarlığı mavi yap */
         textarea:focus { border-color: #667eea; outline: none; }
 
-        /* BUTON STİLİ */
-        .btn { 
-            /* Canlı bir gradient arka plan */
-            background: linear-gradient(to right, #667eea, #764ba2); 
-            color: white; 
-            border: none; 
-            padding: 15px 30px; 
-            border-radius: 50px; /* Tam yuvarlak köşeler */
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 18px; 
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
+        .submit-btn {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white; border: none; padding: 18px;
+            width: 100%; border-radius: 50px; font-size: 20px;
+            font-weight: 600; cursor: pointer; transition: 0.3s;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-top: 20px;
         }
-        /* Butonun üzerine gelince hafifçe yukarı kalksın */
-        .btn:hover { 
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
+        .submit-btn:hover { transform: translateY(-3px); }
 
-        /* CEVAP ANAHTARI STİLİ (Gizli) */
-        #cevap-anahtari {
-            display: none; 
-            margin-top: 40px; 
-            padding: 30px; 
-            /* Daha canlı bir yeşil arka plan */
-            background-color: #d1fae5; 
-            border-left: 5px solid #10b981; /* Sol tarafa yeşil çizgi */
-            border-radius: 15px;
-            animation: fadeIn 0.5s ease-in-out; /* Açılırken yumuşak geçiş efekti */
+        #answer-key {
+            display: none; margin-top: 40px; padding: 30px;
+            background-color: #d1fae5; border-left: 6px solid #10b981;
+            border-radius: 15px; animation: fadeIn 0.5s ease;
         }
-        .cevap-baslik { color: #065f46; margin-top: 0; display: flex; align-items: center; }
-        .cevap-satiri { margin-bottom: 15px; font-weight: 500; color: #064e3b; background: rgba(255,255,255,0.5); padding: 10px; border-radius: 8px;}
+        .ans-item { margin-bottom: 12px; color: #064e3b; padding: 12px; background: white; border-radius: 10px; }
         
-        /* Açılma efekti için animasyon */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+
+        @media (max-width: 600px) {
+            .main-container { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="main-container">
     <h1>🎧 Listening Test</h1>
-    <p class="sub-text">Lütfen parçayı dinleyin ve soruları yanıtlayın.</p>
+    <p class="subtitle">Lütfen kaydı dinleyin ve soruları yanıtlayın.</p>
 
-    <div class="audio-box">
-        <span class="audio-title">Ses Dosyası</span>
-        <small style="color: #718096;">(İnternet üzerinden yüklenmektedir)</small>
+    <div class="audio-section">
+        <strong style="font-size: 1.2rem; color: #4a5568;">Dinleme Kaydı</strong>
         <audio controls>
             <source src="https://www.dropbox.com/scl/fi/vk0acm9buuhcpxx5ujvxv/Eagles-Hotel-California-81-1.mp3?rlkey=4s4hsf5y4f5173clmj855emuw&st=os3nyuo6&raw=1" type="audio/mpeg">
-            <source src="rusyada_olanlar.mp3.mp3" type="audio/mpeg">
-            Tarayıcınız ses çalmayı desteklemiyor.
+            Tarayıcınız desteklemiyor.
         </audio>
     </div>
 
-    <div class="question">
-        <label>1. Soru: Diyalogda geçen ana karakterin mesleği nedir?</label>
-        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
+    <div class="question-block">
+        <label>1. Soru: Ana karakterin mesleği nedir?</label>
+        <textarea placeholder="Yanıtınız..."></textarea>
     </div>
 
-    <div class="question">
+    <div class="question-block">
         <label>2. Soru: Toplantı saat kaçta başlayacak?</label>
-        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
+        <textarea placeholder="Yanıtınız..."></textarea>
     </div>
 
-    <div class="question">
-        <label>3. Soru: Konuşmacı hafta sonu için ne öneriyor?</label>
-        <textarea placeholder="Cevabınızı buraya yazınız..."></textarea>
+    <div class="question-block">
+        <label>3. Soru: Hafta sonu önerisi nedir?</label>
+        <textarea placeholder="Yanıtınız..."></textarea>
     </div>
 
-    <button class="btn" onclick="sinaviBitir()">Sınavı Tamamla ve Kontrol Et</button>
+    <button class="submit-btn" onclick="show()">Sınavı Tamamla ve Kontrol Et</button>
 
-    <div id="cevap-anahtari">
-        <h3 class="cevap-baslik">✅ Cevap Anahtarı</h3>
-        <div class="cevap-satiri">1. Soru Cevabı: Doktor</div>
-        <div class="cevap-satiri">2. Soru Cevabı: 14:30'da</div>
-        <div class="cevap-satiri">3. Soru Cevabı: Doğa yürüyüşü yapmayı</div>
-        <p style="font-size: 0.9em; color: #065f46; margin-top: 20px; text-align: center;">
-            * Lütfen yukarıdaki doğru cevapları kendi yazdıklarınızla karşılaştırınız.
-        </p>
+    <div id="answer-key">
+        <h3 style="margin-top:0; color:#065f46;">✅ Doğru Cevaplar</h3>
+        <div class="ans-item"><strong>1. Cevap:</strong> Doktor</div>
+        <div class="ans-item"><strong>2. Cevap:</strong> 14:30'da</div>
+        <div class="ans-item"><strong>3. Cevap:</strong> Doğa yürüyüşü yapmayı</div>
     </div>
 </div>
 
 <script>
-    function sinaviBitir() {
-        var x = document.getElementById("cevap-anahtari");
-        x.style.display = "block";
-        // Butona tıklandığında butonu gizle (isteğe bağlı)
-        // event.target.style.display = 'none'; 
-        x.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function show() {
+        var key = document.getElementById("answer-key");
+        key.style.display = "block";
+        key.scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 
