@@ -2,150 +2,255 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listening Testi</title>
+    <title>Erasmus Blues Listening</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* --- TASARIM (NYAN CAT + STİL) --- */
         body { 
             font-family: 'Poppins', sans-serif; 
-            /* NYAN CAT ARKA PLANI */
-            background-image: url('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif');
+            background-image: url('https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif'); /* Nyan Cat */
             background-repeat: repeat;
             background-attachment: fixed;
-            margin: 0; 
-            padding: 5px;
-            display: flex;
-            justify-content: center;
+            margin: 0; padding: 20px;
+            display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
         }
-
         .main-container {
-            background: white;
-            width: 100%;
-            /* Geniş kutu ayarı */
-            max-width: 1100px; 
-            padding: 40px; 
-            border-radius: 20px;
-            
-            /* ESKİ VE SAĞLAM GÖLGE AYARI (Bunu geri getirdik) */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            
-            margin: 10px 0;
-            box-sizing: border-box;
+            background: white; width: 100%; max-width: 800px;
+            padding: 40px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            margin-bottom: 60px; /* Müzik butonu üstüne binmesin diye */
         }
-
-        /* Başlıklar Nyan Cat üstünde okunsun diye hafif gölge */
-        h1 { 
-            text-align: center; 
-            color: #667eea; 
-            font-size: 2.2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            margin-top: 0; 
-        }
+        h1 { color: #667eea; margin-top: 0; }
+        img { width: 100%; max-width: 500px; border-radius: 10px; border: 4px solid #f0f4ff; margin-bottom: 20px; }
         
-        p.subtitle { text-align: center; color: #555; margin-bottom: 30px; font-weight: 500; }
-
-        .audio-section {
-            background: #f0f4ff;
-            border-left: 6px solid #667eea;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        audio { width: 100%; margin-top: 10px; }
-
-        .question-block { margin-bottom: 25px; text-align: left; }
-        label { font-weight: 600; display: block; margin-bottom: 10px; color: #2d3748; font-size: 1.1rem; }
-        
+        /* Form elemanları */
         textarea {
-            width: 100%; 
-            height: 120px;
-            padding: 15px;
-            border: 2px solid #e2e8f0; 
-            border-radius: 12px;
-            box-sizing: border-box; 
-            font-family: inherit; 
-            font-size: 15px;
+            width: 100%; max-width: 600px; height: 80px; padding: 10px;
+            border: 2px solid #ddd; border-radius: 10px; margin-bottom: 10px; font-family: inherit;
+        }
+        .btn {
+            background: #667eea; color: white; border: none; padding: 12px 30px;
+            border-radius: 50px; font-size: 16px; cursor: pointer; margin: 10px 5px;
             transition: 0.3s;
         }
-        textarea:focus { border-color: #667eea; outline: none; }
-
-        .submit-btn {
-            background: linear-gradient(to right, #667eea, #764ba2);
-            color: white; border: none; padding: 18px;
-            width: 100%; border-radius: 50px; font-size: 20px;
-            font-weight: 600; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            margin-top: 20px;
-        }
-        .submit-btn:hover { transform: translateY(-3px); }
-
-        #answer-key {
-            display: none; margin-top: 40px; padding: 30px;
-            background-color: #d1fae5; border-left: 6px solid #10b981;
-            border-radius: 15px; animation: fadeIn 0.5s ease;
-        }
-        .ans-item { margin-bottom: 12px; color: #064e3b; padding: 12px; background: white; border-radius: 10px; }
+        .btn:hover { transform: scale(1.05); background: #5a67d8; }
+        .btn-outline { background: white; border: 2px solid #667eea; color: #667eea; }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
-
-        @media (max-width: 600px) {
-            .main-container { padding: 20px; }
-            h1 { font-size: 1.6rem; }
+        .audio-box {
+            background: #f0f4ff; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #c7d2fe;
         }
+        .feedback {
+            background: #d1fae5; color: #065f46; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: left;
+        }
+
+        .sayfa-kutusu { display: none; }
+
+        /* --- MÜZİK BUTONU TASARIMI --- */
+        #music-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            line-height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+        #music-btn:hover {
+            transform: scale(1.1);
+        }
+        /* Çalarken alacağı stil */
+        .playing {
+            background-color: #48bb78 !important; /* Yeşil */
+            color: white;
+            border-color: #2f855a !important;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(72, 187, 120, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(72, 187, 120, 0); }
+        }
+
     </style>
 </head>
 <body>
 
 <div class="main-container">
-    <h1>🎧 Listening Test</h1>
-    <p class="subtitle">Lütfen kaydı dinleyin ve soruları yanıtlayın.</p>
 
-    <div class="audio-section">
-        <strong style="font-size: 1.2rem; color: #4a5568;">Dinleme Kaydı</strong>
-        <audio controls>
-            <source src="https://www.dropbox.com/scl/fi/vk0acm9buuhcpxx5ujvxv/Eagles-Hotel-California-81-1.mp3?rlkey=4s4hsf5y4f5173clmj855emuw&st=os3nyuo6&raw=1" type="audio/mpeg">
-            Tarayıcınız desteklemiyor.
-        </audio>
+    <div id="bolum1" class="sayfa-kutusu" style="display: block;">
+        <span style="background:#e0e7ff; color:#4338ca; padding:5px 15px; border-radius:20px;">Part 1</span>
+        <h1>🌧️ Erasmus Blues</h1>
+        <img src="https://images.unsplash.com/photo-1520986606214-8b456906c813?w=600&auto=format&fit=crop" alt="London Bus">
+        
+        <div class="audio-box">
+            <p>🎧 <b>Step 1: Listen to the context</b></p>
+            <audio controls style="width:100%">
+                <source src="https://www.dropbox.com/scl/fi/svkqqsadysw3rm7k5vena/part1duzenlenmis.wav?rlkey=g56zm69m3bl9hhndijdwbt1mj&st=86fin6wv&raw=1" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div style="text-align: left;">
+            <p><b>Prediction Question:</b> Zeynep says she made a mistake coming to London. Why does she want to leave?</p>
+        </div>
+        <textarea id="cevap1" placeholder="I think..."></textarea>
+        <br>
+        
+        <button type="button" class="btn" onclick="sayfaAc('bolum2')">Tahmini Gönder ve Devam Et 👉</button>
     </div>
 
-    <div class="question-block">
-        <label>1. Soru: Ana karakterin mesleği nedir?</label>
-        <textarea placeholder="Yanıtınız..."></textarea>
+
+    <div id="bolum2" class="sayfa-kutusu">
+        <span style="background:#e0e7ff; color:#4338ca; padding:5px 15px; border-radius:20px;">Part 2</span>
+        <h1>🚌 The rude brit with no manners</h1>
+        
+        <div class="feedback">✅ <b>Real Answer:</b> She is feeling <u>Homesick</u>.</div>
+
+        <div class="audio-box">
+            <p>🎧 <b>Step 2: Listen to the bus story</b></p>
+            <audio controls style="width:100%">
+                <source src="https://www.dropbox.com/scl/fi/29givk5zlkewh39t5f62g/part2.wav?rlkey=uv233a6u55zigie4xl3lqdsz6&st=qlqd7nyf&raw=1" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div style="text-align: left;">
+            <p><b>Prediction Question:</b> Zeynep tried to talk to a local lady. How did the lady react?</p>
+        </div>
+        <textarea id="cevap2" placeholder="I think the lady..."></textarea>
+        <br>
+
+        <button type="button" class="btn btn-outline" onclick="sayfaAc('bolum1')">⬅ Geri</button>
+        <button type="button" class="btn" onclick="sayfaAc('bolum3')">Tahmini Gönder ve Devam Et 👉</button>
     </div>
 
-    <div class="question-block">
-        <label>2. Soru: Toplantı saat kaçta başlayacak?</label>
-        <textarea placeholder="Yanıtınız..."></textarea>
+
+    <div id="bolum3" class="sayfa-kutusu">
+        <span style="background:#e0e7ff; color:#4338ca; padding:5px 15px; border-radius:20px;">Part 3</span>
+        <h1>💡 Her derde deva</h1>
+        
+        <div class="feedback">✅ <b>Real Answer:</b> The lady ignored her (Privacy culture).</div>
+
+        <div style="background:#fff7ed; padding:15px; border-radius:10px; border:2px dashed #f97316; margin-bottom:20px;">
+            <p style="color:#d35400; font-weight:bold; margin:0;">🛑 PREDICTION TIME:</p>
+            <p>Tolga has a plan to 'bring Istanbul to the kitchen'. <b>What are they going to do?</b></p>
+            <textarea id="cevap3" placeholder="My guess is..."></textarea>
+        </div>
+
+        <div class="audio-box">
+            <p>🎧 <b>Step 3: Listen to the Finale</b></p>
+            <audio controls style="width:100%">
+                <source src="https://www.dropbox.com/scl/fi/ffg6yi527fw64e5n2to6h/part3.wav?rlkey=vt3bp4xlqu4p80uyq12kcv5r2&st=35rvgol7&raw=1" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <button type="button" class="btn btn-outline" onclick="sayfaAc('bolum2')">⬅ Geri</button>
+        <button type="button" class="btn" style="background:#2f855a" onclick="raporla()">Testi Bitir ve Raporla ✅</button>
     </div>
 
-    <div class="question-block">
-        <label>3. Soru: Hafta sonu önerisi nedir?</label>
-        <textarea placeholder="Yanıtınız..."></textarea>
+
+    <div id="rapor-ekrani" class="sayfa-kutusu">
+        <h1>🍳 Afiyet Olsun!</h1>
+        <p>They made <b>Menemen</b> together! 🇹🇷</p>
+        
+        <div style="text-align:left; background:#f9f9f9; padding:20px; border:2px dashed #ccc; margin-top:20px;">
+            <h3>📝 Karşılaştırmalı Rapor:</h3>
+            
+            <p><b>1. The Mystery:</b></p>
+            <p><i>👤 Senin Tahminin:</i> <span id="r1" style="color:#4338ca; font-style:italic;">...</span></p>
+            <p style="color:#2f855a; font-weight:bold;">✅ Doğru Cevap: Homesick (Ev Özlemi)</p>
+            <hr style="border:1px solid #eee;">
+
+            <p><b>2. The Bus Incident:</b></p>
+            <p><i>👤 Senin Tahminin:</i> <span id="r2" style="color:#4338ca; font-style:italic;">...</span></p>
+            <p style="color:#2f855a; font-weight:bold;">✅ Doğru Cevap: She ignored Zeynep</p>
+            <hr style="border:1px solid #eee;">
+
+            <p><b>3. The Solution:</b></p>
+            <p><i>👤 Senin Tahminin:</i> <span id="r3" style="color:#4338ca; font-style:italic;">...</span></p>
+            <p style="color:#2f855a; font-weight:bold;">✅ Doğru Cevap: Cooking a traditional food</p>
+        </div>
+        <br>
+        <button type="button" class="btn" onclick="indir()">💾 Raporu İndir</button>
+        <button type="button" class="btn btn-outline" onclick="location.reload()">Başa Dön 🔄</button>
     </div>
 
-    <button class="submit-btn" onclick="show()">Sınavı Tamamla ve Kontrol Et</button>
-
-    <div id="answer-key">
-        <h3 style="margin-top:0; color:#065f46;">✅ Doğru Cevaplar</h3>
-        <div class="ans-item"><strong>1. Cevap:</strong> Doktor</div>
-        <div class="ans-item"><strong>2. Cevap:</strong> 14:30'da</div>
-        <div class="ans-item"><strong>3. Cevap:</strong> Doğa yürüyüşü yapmayı</div>
-    </div>
 </div>
 
+<audio id="bgMusic" loop>
+    <source src="https://www.dropbox.com/scl/fi/vk0acm9buuhcpxx5ujvxv/Eagles-Hotel-California-81-1.mp3?rlkey=4s4hsf5y4f5173clmj855emuw&st=6ywjqrfp&raw=1" type="audio/mpeg">
+</audio>
+
+<div id="music-btn" onclick="muzikAcKapat()">🎵</div>
+
 <script>
-    function show() {
-        var key = document.getElementById("answer-key");
-        key.style.display = "block";
-        key.scrollIntoView({ behavior: 'smooth' });
+    // SAYFA GEÇİŞLERİ
+    function sayfaAc(hedefID) {
+        var sayfalar = document.getElementsByClassName('sayfa-kutusu');
+        for (var i = 0; i < sayfalar.length; i++) {
+            sayfalar[i].style.display = 'none';
+        }
+        document.getElementById(hedefID).style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    // MÜZİK KONTROLÜ
+    var muzik = document.getElementById("bgMusic");
+    var buton = document.getElementById("music-btn");
+    
+    // Ses düzeyini biraz kısalım (%30) ki konuşmalar duyulsun
+    muzik.volume = 0.1; 
+
+    function muzikAcKapat() {
+        if (muzik.paused) {
+            muzik.play();
+            buton.innerHTML = "🔊"; // Simge değişir
+            buton.classList.add("playing"); // Yeşil olur
+        } else {
+            muzik.pause();
+            buton.innerHTML = "🎵"; // Eski simge
+            buton.classList.remove("playing"); // Eski renk
+        }
+    }
+
+    // RAPORLAMA
+    function raporla() {
+        var c1 = document.getElementById('cevap1').value;
+        var c2 = document.getElementById('cevap2').value;
+        var c3 = document.getElementById('cevap3').value;
+
+        document.getElementById('r1').innerText = c1 || "-";
+        document.getElementById('r2').innerText = c2 || "-";
+        document.getElementById('r3').innerText = c3 || "-";
+
+        sayfaAc('rapor-ekrani');
+    }
+
+    // İNDİRME
+    function indir() {
+        var c1 = document.getElementById('cevap1').value || "Boş";
+        var c2 = document.getElementById('cevap2').value || "Boş";
+        var c3 = document.getElementById('cevap3').value || "Boş";
+        
+        var metin = "ERASMUS BLUES - STUDENT REPORT\n\n" + 
+                    "1. MYSTERY\nStudent Guess: " + c1 + "\nCorrect Answer: Homesick\n\n" +
+                    "2. BUS INCIDENT\nStudent Guess: " + c2 + "\nCorrect Answer: Ignored/Privacy\n\n" +
+                    "3. SOLUTION\nStudent Guess: " + c3 + "\nCorrect Answer: Cooking Menemen";
+        
+        var blob = new Blob([metin], { type: "text/plain;charset=utf-8" });
+        var link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "listening_report.txt";
+        link.click();
     }
 </script>
 
 </body>
 </html>
-
-
-
-
